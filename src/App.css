@@ -24,3 +24,7 @@ button:hover {
   background-color: rgb(165, 195, 255);
   cursor: pointer;
 }
+
+#selected {
+  background-color: red;
+}

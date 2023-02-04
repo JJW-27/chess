@@ -27,6 +27,8 @@ const Chessboard = () => {
             xCoord={coord[0]}
             yCoord={coord[1]}
             key={coord[3]}
+            selectedSquare={selectedSquare}
+            setSelectedSquare={setSelectedSquare}
           />
         );
       })}
