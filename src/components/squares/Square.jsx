@@ -22,7 +22,18 @@ const Square = ({
     setSelectedSquare({ xCoord: squareData.xCoord, yCoord: squareData.yCoord });
   };
 
-  return <button className={squareColour} id={isSelected} onClick={handleClick}></button>;
+  const handleClickOff = e => {
+    setSelectedSquare({});
+  };
+
+  return (
+    <button
+      className={squareColour}
+      id={isSelected}
+      onClick={handleClick}
+      onBlur={handleClickOff}
+    ></button>
+  );
 };
 
 export default Square;
