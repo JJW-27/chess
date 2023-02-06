@@ -1,8 +1,10 @@
 import Square from './squares/Square';
-import { useState, UseEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const Chessboard = () => {
   const [selectedSquare, setSelectedSquare] = useState({});
+  const [isPieceSelected, setIsPieceSelected] = useState(false);
+  const [movePlayed, setMovePlayed] = useState(false);
 
   const squareCoordinates = [];
   let squareIsLight = true;
@@ -17,7 +19,9 @@ const Chessboard = () => {
       }
     }
   }
-
+  console.log(
+    `Selected square = ${selectedSquare.pieceName}, x-${selectedSquare.xCoord} y-${selectedSquare.yCoord}`
+  );
   return (
     <div className="chessboard">
       {squareCoordinates.map(coord => {
@@ -29,6 +33,10 @@ const Chessboard = () => {
             key={coord[3]}
             selectedSquare={selectedSquare}
             setSelectedSquare={setSelectedSquare}
+            isPieceSelected={isPieceSelected}
+            setIsPieceSelected={setIsPieceSelected}
+            movePlayed={movePlayed}
+            setMovePlayed={setMovePlayed}
           />
         );
       })}
