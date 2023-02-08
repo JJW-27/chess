@@ -1,4 +1,6 @@
 .chessboard {
+  display: flex;
+  flex-wrap: wrap;
   border: black 1px solid;
   height: 500px;
   width: 500px;

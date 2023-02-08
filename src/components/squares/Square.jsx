@@ -1,15 +1,10 @@
 import Piece from './Piece';
-import { useState, useEffect } from 'react';
-import checkValidSquares from '../../utils/checkValidSquares';
 
 const Square = ({ square }) => {
   const {
-    x,
-    y,
     pieceName,
     pieceColour,
-    isSelected,
-    isValidSquare,
+
     squareIsLight,
   } = square;
 

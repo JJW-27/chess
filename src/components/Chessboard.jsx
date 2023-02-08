@@ -3,12 +3,8 @@ import { useState, useEffect } from 'react';
 
 const Chessboard = () => {
   const [boardState, setBoardState] = useState([]);
-  const [selectedSquare, setSelectedSquare] = useState({});
-  const [isPieceSelected, setIsPieceSelected] = useState(false);
-  const [movePlayed, setMovePlayed] = useState(false);
-  const [validSquares, setValidSquares] = useState([[]]);
 
-    useEffect(() => {
+  useEffect(() => {
     const initialBoardState = [];
 
     let squareIsLight = true;
@@ -24,6 +20,7 @@ const Chessboard = () => {
           isSelected: 'false',
           isValidSquare: 'false',
           squareIsLight,
+          squareID: count,
         });
         squareIsLight = !squareIsLight;
         count++;
@@ -62,6 +59,7 @@ const Chessboard = () => {
         square.pieceName = 'pawn';
       }
     });
+
     setBoardState(initialBoardState);
   }, []);
 
