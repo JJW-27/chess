@@ -17,6 +17,7 @@ const Square = ({
     yCoord,
   });
 
+  // sets initial boardstate
   useEffect(() => {
     let initialPieceColour;
     if (squareData.yCoord >= 7) {
@@ -79,8 +80,10 @@ const Square = ({
     }
   }, [movePlayed]);
 
+  // sets CSS class dynamically
   const squareColour = squareIsLight ? 'light-square' : 'dark-square';
 
+  // sets CSS id dynamically
   const isSelected =
     selectedSquare.xCoord === squareData.xCoord &&
     selectedSquare.yCoord === squareData.yCoord
@@ -89,6 +92,7 @@ const Square = ({
 
   const handleClick = e => {
     e.preventDefault();
+    // if the clicked square has a piece and a piece isn't already selected
     if (squareData.pieceName && !isPieceSelected) {
       setSelectedSquare({
         xCoord: squareData.xCoord,
@@ -97,14 +101,21 @@ const Square = ({
         pieceColour: squareData.pieceColour,
       });
       setIsPieceSelected(true);
-    } else if (squareData.pieceColour === selectedSquare.pieceColour) {
+    }
+    // if a piece is selected, only allow selecting of same colour piece
+    else if (squareData.pieceColour === selectedSquare.pieceColour) {
       setSelectedSquare({
         xCoord: squareData.xCoord,
         yCoord: squareData.yCoord,
         pieceName: squareData.pieceName,
         pieceColour: squareData.pieceColour,
       });
-    } else if (isPieceSelected && !squareData.pieceName) {
+    }
+    // if a piece is selected and the target square has no piece, or a piece of the opposite colour, add that piece to the target square and clear the selected square
+    else if (
+      isPieceSelected &&
+      squareData.pieceColour !== selectedSquare.pieceColour
+    ) {
       console.log('move played');
       setSquareData(currData => {
         return {

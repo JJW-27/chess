@@ -6,6 +6,8 @@ const Chessboard = () => {
   const [isPieceSelected, setIsPieceSelected] = useState(false);
   const [movePlayed, setMovePlayed] = useState(false);
 
+
+  // generates 64 squares with unique x and y coordinates, from top left to bottom right
   const squareCoordinates = [];
   let squareIsLight = true;
   let count = 0;
