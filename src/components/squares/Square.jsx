@@ -1,5 +1,6 @@
 import Piece from './Piece';
 import { useState, useEffect } from 'react';
+import checkValidSquares from '../../utils/checkValidSquares';
 
 const Square = ({
   xCoord,
@@ -11,6 +12,8 @@ const Square = ({
   setIsPieceSelected,
   movePlayed,
   setMovePlayed,
+  validSquares,
+  setValidSquares,
 }) => {
   const [squareData, setSquareData] = useState({
     xCoord,
@@ -84,11 +87,15 @@ const Square = ({
   const squareColour = squareIsLight ? 'light-square' : 'dark-square';
 
   // sets CSS id dynamically
-  const isSelected =
+  let selectedOrValid;
+
+  if (
     selectedSquare.xCoord === squareData.xCoord &&
     selectedSquare.yCoord === squareData.yCoord
-      ? 'selected'
-      : null;
+  ) {
+    selectedOrValid = 'selected';
+    
+  }
 
   const handleClick = e => {
     e.preventDefault();
@@ -116,7 +123,6 @@ const Square = ({
       isPieceSelected &&
       squareData.pieceColour !== selectedSquare.pieceColour
     ) {
-      console.log('move played');
       setSquareData(currData => {
         return {
           ...currData,
@@ -130,8 +136,19 @@ const Square = ({
     }
   };
 
+  useEffect(() => {
+    if (isPieceSelected) {
+      const returnedValidSquares = checkValidSquares(squareData);
+      setValidSquares(returnedValidSquares);
+      if (validSquares.includes([squareData.xCoord, squareData.yCoord])) {
+        selectedOrValid = 'valid';
+        console.log('true');
+      }
+    }
+  }, [isPieceSelected]);
+
   return (
-    <button className={squareColour} id={isSelected} onClick={handleClick}>
+    <button className={squareColour} id={selectedOrValid} onClick={handleClick}>
       <Piece
         pieceName={squareData.pieceName}
         pieceColour={squareData.pieceColour}

@@ -1,22 +1,22 @@
 .chessboard {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
-  border:black 1px solid;
+  border: black 1px solid;
   height: 500px;
   width: 500px;
 }
 
 .light-square {
-  height:12.5%;
-  width:12.5%;
-  border:none;
+  height: 12.5%;
+  width: 12.5%;
+  border: none;
   background-color: rgb(149, 116, 89);
 }
 
 .dark-square {
-  height:12.5%;
-  width:12.5%;
-  border:none;
+  height: 12.5%;
+  width: 12.5%;
+  border: none;
   background-color: rgb(106, 63, 28);
 }
 
@@ -26,5 +26,9 @@ button:hover {
 }
 
 #selected {
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.669);
+}
+
+#valid {
+  background-color: rgb(165, 195, 255);
 }

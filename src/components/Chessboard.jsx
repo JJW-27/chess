@@ -2,13 +2,16 @@ import Square from './squares/Square';
 import { useState, useEffect } from 'react';
 
 const Chessboard = () => {
+  const [boardState, setBoardState] = useState({});
   const [selectedSquare, setSelectedSquare] = useState({});
   const [isPieceSelected, setIsPieceSelected] = useState(false);
   const [movePlayed, setMovePlayed] = useState(false);
-
+  const [validSquares, setValidSquares] = useState([[]]);
 
   // generates 64 squares with unique x and y coordinates, from top left to bottom right
-  const squareCoordinates = [];
+  useEffect(() => {
+    const initialBoardState = {}
+    const squareCoordinates = [];
   let squareIsLight = true;
   let count = 0;
   for (let y = 8; y >= 1; y--) {
@@ -21,9 +24,9 @@ const Chessboard = () => {
       }
     }
   }
-  console.log(
-    `Selected square = ${selectedSquare.pieceName}, x-${selectedSquare.xCoord} y-${selectedSquare.yCoord}`
-  );
+  }, []);
+  
+
   return (
     <div className="chessboard">
       {squareCoordinates.map(coord => {
@@ -39,6 +42,8 @@ const Chessboard = () => {
             setIsPieceSelected={setIsPieceSelected}
             movePlayed={movePlayed}
             setMovePlayed={setMovePlayed}
+            validSquares={validSquares}
+            setValidSquares={setValidSquares}
           />
         );
       })}
