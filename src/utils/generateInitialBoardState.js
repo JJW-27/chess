@@ -9,10 +9,10 @@ const generateInitialBoardState = () => {
       initialBoardState.push({
         x,
         y,
-        pieceName: null,
+        pieceName: 'empty',
         isWhitePiece: null,
-        isSelected: 'false',
-        isValidSquare: 'false',
+        isSelected: false,
+        isValidSquare: false,
         squareIsLight,
         squareID: count,
       });

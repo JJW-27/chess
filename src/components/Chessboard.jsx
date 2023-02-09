@@ -6,12 +6,16 @@ const Chessboard = () => {
   const [boardState, setBoardState] = useState([]);
   const [isPieceSelected, setIsPieceSelected] = useState(false);
   const [isWhitesTurn, setIsWhitesTurn] = useState(true);
+  const [selectedSquare, setSelectedSquare] = useState({});
 
   useEffect(() => {
     const initialBoardState = generateInitialBoardState();
     setBoardState(initialBoardState);
   }, []);
-
+  console.log(selectedSquare);
+  console.log(
+    `isWhitesTurn - ${isWhitesTurn}, isPieceSelected - ${isPieceSelected}`
+  );
   return (
     <div className="chessboard">
       {boardState.map(square => {
@@ -24,6 +28,8 @@ const Chessboard = () => {
             setIsPieceSelected={setIsPieceSelected}
             isWhitesTurn={isWhitesTurn}
             setIsWhitesTurn={setIsWhitesTurn}
+            selectedSquare={selectedSquare}
+            setSelectedSquare={setSelectedSquare}
           />
         );
       })}
