@@ -1,97 +1,46 @@
 import Piece from './Piece';
 
-const Square = ({ square }) => {
-  const {
-    pieceName,
-    pieceColour,
+const Square = ({
+  square,
+  boardState,
+  setBoardState,
+  isPieceSelected,
+  setIsPieceSelected,
+  isWhitesTurn,
+  setIsWhitesTurn,
+}) => {
+  const { x, y, pieceName, pieceColour, squareIsLight, isSelected } = square;
 
-    squareIsLight,
-  } = square;
+  let squareColour = squareIsLight ? 'light-square' : 'dark-square';
 
-  const squareColour = squareIsLight ? 'light-square' : 'dark-square';
+  if (isSelected === true) {
+    squareColour = 'selected';
+  }
 
-  // useEffect(() => {
-  //   if (
-  //     selectedSquare.xCoord === squareData.xCoord &&
-  //     selectedSquare.yCoord === squareData.yCoord
-  //   ) {
-  //     setSquareData(currData => {
-  //       const newData = { ...currData };
-  //       delete newData.pieceName;
-  //       delete newData.pieceColour;
-  //       return newData;
-  //     });
-  //     setSelectedSquare({});
-  //     setIsPieceSelected(false);
-  //   }
-  // }, [movePlayed]);
+  const handleClick = e => {
+    e.preventDefault();
 
-  // // sets CSS class dynamically
-  // const squareColour = squareIsLight ? 'light-square' : 'dark-square';
-
-  // // sets CSS id dynamically
-  // let selectedOrValid;
-
-  // if (
-  //   selectedSquare.xCoord === squareData.xCoord &&
-  //   selectedSquare.yCoord === squareData.yCoord
-  // ) {
-  //   selectedOrValid = 'selected';
-
-  // }
-
-  // const handleClick = e => {
-  //   e.preventDefault();
-  //   // if the clicked square has a piece and a piece isn't already selected
-  //   if (squareData.pieceName && !isPieceSelected) {
-  //     setSelectedSquare({
-  //       xCoord: squareData.xCoord,
-  //       yCoord: squareData.yCoord,
-  //       pieceName: squareData.pieceName,
-  //       pieceColour: squareData.pieceColour,
-  //     });
-  //     setIsPieceSelected(true);
-  //   }
-  //   // if a piece is selected, only allow selecting of same colour piece
-  //   else if (squareData.pieceColour === selectedSquare.pieceColour) {
-  //     setSelectedSquare({
-  //       xCoord: squareData.xCoord,
-  //       yCoord: squareData.yCoord,
-  //       pieceName: squareData.pieceName,
-  //       pieceColour: squareData.pieceColour,
-  //     });
-  //   }
-  //   // if a piece is selected and the target square has no piece, or a piece of the opposite colour, add that piece to the target square and clear the selected square
-  //   else if (
-  //     isPieceSelected &&
-  //     squareData.pieceColour !== selectedSquare.pieceColour
-  //   ) {
-  //     setSquareData(currData => {
-  //       return {
-  //         ...currData,
-  //         pieceName: selectedSquare.pieceName,
-  //         pieceColour: selectedSquare.pieceColour,
-  //       };
-  //     });
-  //     setMovePlayed(played => {
-  //       return !played;
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (isPieceSelected) {
-  //     const returnedValidSquares = checkValidSquares(squareData);
-  //     setValidSquares(returnedValidSquares);
-  //     if (validSquares.includes([squareData.xCoord, squareData.yCoord])) {
-  //       selectedOrValid = 'valid';
-  //       console.log('true');
-  //     }
-  //   }
-  // }, [isPieceSelected]);
+    // sets selected square depending on whose turn it is
+    if (
+      (isWhitesTurn && pieceColour === 'white') ||
+      (!isWhitesTurn && pieceColour === 'black')
+    ) {
+      setBoardState(currBoardState => {
+        const newBoardState = currBoardState.map(square => {
+          if (x === square.x && y === square.y) {
+            return { ...square, isSelected: true };
+          } else {
+            return { ...square, isSelected: false };
+          }
+        });
+        return newBoardState;
+      });
+      setIsPieceSelected(true);
+    }
+  };
 
   return (
-    <button className={squareColour}>
+    <button className={squareColour} onClick={handleClick}>
       <Piece pieceName={pieceName} pieceColour={pieceColour} />
     </button>
   );
