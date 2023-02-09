@@ -7,10 +7,10 @@ import {
   FaChessRook,
 } from 'react-icons/fa';
 
-const Piece = ({ pieceName, pieceColour }) => {
+const Piece = ({ pieceName, isWhitePiece }) => {
   let piece;
 
-  if (pieceColour === 'black') {
+  if (!isWhitePiece) {
     switch (pieceName) {
       case 'bishop':
         piece = <FaChessBishop size={40} />;

@@ -9,7 +9,7 @@ const Square = ({
   isWhitesTurn,
   setIsWhitesTurn,
 }) => {
-  const { x, y, pieceName, pieceColour, squareIsLight, isSelected } = square;
+  const { x, y, pieceName, isWhitePiece, squareIsLight, isSelected } = square;
 
   let squareColour = squareIsLight ? 'light-square' : 'dark-square';
 
@@ -22,8 +22,8 @@ const Square = ({
 
     // sets selected square depending on whose turn it is
     if (
-      (isWhitesTurn && pieceColour === 'white') ||
-      (!isWhitesTurn && pieceColour === 'black')
+      (isWhitesTurn && isWhitePiece) ||
+      (!isWhitesTurn && !isWhitePiece === 'black')
     ) {
       setBoardState(currBoardState => {
         const newBoardState = currBoardState.map(square => {
@@ -41,7 +41,7 @@ const Square = ({
 
   return (
     <button className={squareColour} onClick={handleClick}>
-      <Piece pieceName={pieceName} pieceColour={pieceColour} />
+      <Piece pieceName={pieceName} isWhitePiece={isWhitePiece} />
     </button>
   );
 };
