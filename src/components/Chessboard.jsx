@@ -12,10 +12,10 @@ const Chessboard = () => {
     const initialBoardState = generateInitialBoardState();
     setBoardState(initialBoardState);
   }, []);
-  console.log(selectedSquare);
   console.log(
-    `isWhitesTurn - ${isWhitesTurn}, isPieceSelected - ${isPieceSelected}`
+    `white's turn? ${isWhitesTurn}, 'Is piece selected? ${isPieceSelected}`
   );
+  console.log(selectedSquare);
   return (
     <div className="chessboard">
       {boardState.map(square => {

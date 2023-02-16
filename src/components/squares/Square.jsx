@@ -23,7 +23,11 @@ const Square = ({
     e.preventDefault();
 
     // sets selected square depending on whose turn it is, and only allows selecting of a square with a piece on it
-    if ((isWhitesTurn && isWhitePiece) || (!isWhitesTurn && !isWhitePiece)) {
+    if (
+      (isWhitesTurn && isWhitePiece) ||
+      (!isWhitesTurn && isWhitePiece === false)
+    ) {
+      console.log('1');
       setBoardState(currBoardState => {
         const newBoardState = currBoardState.map(square => {
           if (x === square.x && y === square.y) {
@@ -46,6 +50,7 @@ const Square = ({
         (isWhitePiece || pieceName === 'empty') &&
         isPieceSelected)
     ) {
+      console.log('2');
       setBoardState(currBoardState => {
         const selectedX = selectedSquare.x;
         const selectedY = selectedSquare.y;
@@ -69,6 +74,7 @@ const Square = ({
             return { ...square };
           }
         });
+
         return newBoardState;
       });
       setIsPieceSelected(false);
