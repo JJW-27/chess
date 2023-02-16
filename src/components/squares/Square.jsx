@@ -10,6 +10,7 @@ const Square = ({
   setIsWhitesTurn,
   selectedSquare,
   setSelectedSquare,
+  setCachedTurns,
 }) => {
   const { x, y, pieceName, isWhitePiece, squareIsLight, isSelected } = square;
 
@@ -27,7 +28,6 @@ const Square = ({
       (isWhitesTurn && isWhitePiece) ||
       (!isWhitesTurn && isWhitePiece === false)
     ) {
-      console.log('1');
       setBoardState(currBoardState => {
         const newBoardState = currBoardState.map(square => {
           if (x === square.x && y === square.y) {
@@ -50,7 +50,6 @@ const Square = ({
         (isWhitePiece || pieceName === 'empty') &&
         isPieceSelected)
     ) {
-      console.log('2');
       setBoardState(currBoardState => {
         const selectedX = selectedSquare.x;
         const selectedY = selectedSquare.y;
@@ -76,6 +75,17 @@ const Square = ({
         });
 
         return newBoardState;
+      });
+      setCachedTurns(currentCache => {
+        const newCache = currentCache.map(boardState => {
+          const newBoardState = boardState.map(square => {
+            square = { ...square };
+            return square;
+          });
+          return newBoardState;
+        });
+        newCache.push(boardState);
+        return newCache;
       });
       setIsPieceSelected(false);
       setIsWhitesTurn(value => !value);
